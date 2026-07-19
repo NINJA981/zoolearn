@@ -74,3 +74,80 @@ body {
     user-select: none;
     -webkit-user-drag: none;
 }
+
+/* Equine Research Center Styles */
+.research-pane {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+}
+.research-pane.pointer-events-none {
+    transform: translateY(10px);
+}
+
+/* Custom Scrollbar for Chat Feed and Simulator output */
+#chat-feed::-webkit-scrollbar,
+#sim-stages-timeline::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-feed::-webkit-scrollbar-thumb,
+#sim-stages-timeline::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+#chat-feed::-webkit-scrollbar-thumb:hover,
+#sim-stages-timeline::-webkit-scrollbar-thumb:hover {
+    background: #FFC107;
+}
+
+/* Canvas drawing cursors */
+#sketch-canvas {
+    touch-action: none;
+}
+
+/* Dig Grid Excavation styling */
+.dig-block {
+    position: relative;
+    user-select: none;
+    transition: background-color 0.2s, transform 0.1s, border-color 0.2s;
+}
+.dig-block:not(.excavated):hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+.dig-block:not(.excavated):active {
+    transform: scale(0.95);
+}
+
+/* Dig Block Strata States */
+.dig-block.dirt {
+    background: radial-gradient(circle, #5c4033 0%, #3d2b1f 100%);
+    border: 1px solid #704e3d;
+}
+.dig-block.clay {
+    background: radial-gradient(circle, #b87333 0%, #7c4c1e 100%);
+    border: 1px solid #c88343;
+}
+.dig-block.stone {
+    background: radial-gradient(circle, #4a4a4a 0%, #2e2e2e 100%);
+    border: 1px solid #5a5a5a;
+}
+.dig-block.excavated {
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: default;
+}
+.dig-block.excavated.has-fossil {
+    background: radial-gradient(circle, #2d240e 0%, #000000 100%);
+    border: 1px solid #FFC107;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+    }
+}
+

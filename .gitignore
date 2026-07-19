@@ -1,2 +1,4 @@
 # Ignore large backup zip files
 *.zip
+node_modules/
+.env

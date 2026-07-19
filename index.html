@@ -327,7 +327,7 @@
 
     <!-- HORIZONTAL TIMELINE -->
     <section id="timeline-container" class="h-screen bg-dark overflow-hidden hidden md:block">
-        <div id="timeline-scroll" class="flex h-full w-[800vw]">
+        <div id="timeline-scroll" class="flex h-full w-[600vw]">
             
             <!-- Stage 1 -->
             <div class="w-screen h-full flex flex-col justify-center px-20">
@@ -516,6 +516,250 @@
                                 <h3 class="text-4xl font-display text-primary mb-6">Anatomical Mechanics</h3>
                                 <p class="text-xl text-gray-300 leading-relaxed max-w-3xl">Notice the profound fusion of the ulna and fibula in the lower legs over time. This prevented rotation of the limb, creating a highly stable, forward-moving, spring-like mechanism. Paired with a massive, keratinous single hoof, the anatomy transformed strictly to serve high-speed, sustained running on hard terrain.</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUINE RESEARCH CENTER -->
+    <section id="research-center" class="py-32 bg-dark border-t border-white/10 relative z-10">
+        <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-display text-center mb-6 gs-reveal">Research Center</h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-16">Evolve, analyze, and discover. Test evolutionary parameters in the genetic sandbox, interact with the AI Paleontologist desk, and collaborate on fossil excavation.</p>
+
+            <!-- Research Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 border-b border-white/10 pb-4">
+                <button class="research-tab-btn active text-primary border-b-2 border-primary pb-2 uppercase tracking-widest font-display transition-colors text-sm md:text-base" data-target="pane-simulator">GenEquus Sandbox</button>
+                <button class="research-tab-btn text-gray-500 hover:text-white pb-2 border-b-2 border-transparent uppercase tracking-widest font-display transition-colors text-sm md:text-base" data-target="pane-ai-lab">AI Paleontologist Lab</button>
+                <button class="research-tab-btn text-gray-500 hover:text-white pb-2 border-b-2 border-transparent uppercase tracking-widest font-display transition-colors text-sm md:text-base" data-target="pane-expedition">Deep-Time Expedition</button>
+            </div>
+
+            <!-- Tab Panes -->
+            <div class="relative min-h-[600px] w-full">
+                
+                <!-- PANE 1: Simulator -->
+                <div id="pane-simulator" class="research-pane transition-opacity duration-500 opacity-100 z-10 flex flex-col lg:flex-row gap-12">
+                    <!-- Controls -->
+                    <div class="w-full lg:w-1/3 bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-display text-primary mb-6">Environmental Controls</h3>
+                            
+                            <!-- Slider 1: Humidity -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-300">Humidity / Precipitation</span>
+                                    <span id="val-humidity" class="text-primary font-mono">50%</span>
+                                </div>
+                                <input type="range" id="input-humidity" min="0" max="100" value="50" class="w-full accent-primary bg-zinc-800 rounded-lg appearance-none h-2 cursor-pointer">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Arid Steppe</span>
+                                    <span>Tropical Marsh</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 2: Grassland Expansion -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-300">Grassland Coverage</span>
+                                    <span id="val-grassland" class="text-primary font-mono">50%</span>
+                                </div>
+                                <input type="range" id="input-grassland" min="0" max="100" value="50" class="w-full accent-primary bg-zinc-800 rounded-lg appearance-none h-2 cursor-pointer">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Jungle Canopy</span>
+                                    <span>Open Prairie</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 3: Predator Density -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-300">Predator Pressure</span>
+                                    <span id="val-predators" class="text-primary font-mono">50%</span>
+                                </div>
+                                <input type="range" id="input-predators" min="0" max="100" value="50" class="w-full accent-primary bg-zinc-800 rounded-lg appearance-none h-2 cursor-pointer">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Low Risk</span>
+                                    <span>Apex Pack Speed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-run-simulation" class="w-full bg-primary hover:bg-yellow-500 text-black font-bold uppercase py-4 rounded-xl tracking-wider font-display transition-all duration-300 shadow-[0_0_15px_rgba(255,193,7,0.3)] hover:shadow-[0_0_25px_rgba(255,193,7,0.5)]">Run Genetic Simulation</button>
+                    </div>
+
+                    <!-- Simulator Results -->
+                    <div class="w-full lg:w-2/3 flex flex-col justify-between">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 h-full flex flex-col">
+                            <h3 class="text-2xl font-display text-primary mb-4">Evolutionary Output</h3>
+                            <div id="sim-pathway-container" class="mb-6 hidden bg-black/30 border border-white/5 p-4 rounded-xl">
+                                <span id="sim-pathway-badge" class="bg-primary/20 text-primary border border-primary/30 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest">Outcome</span>
+                                <h4 id="sim-pathway-title" class="text-3xl font-display mt-2 text-white">Pathway Title</h4>
+                                <p id="sim-pathway-desc" class="text-gray-400 mt-2 text-sm leading-relaxed">Adjust environmental variables and run the simulation to see results.</p>
+                            </div>
+                            
+                            <!-- Stages Timeline Container -->
+                            <div class="flex-grow overflow-y-auto max-h-[400px] pr-2 space-y-4" id="sim-stages-timeline">
+                                <div class="text-gray-500 text-center py-20 font-mono">
+                                    <svg class="w-12 h-12 mx-auto mb-4 text-gray-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                                    Adjust climate settings on the left to simulate natural selection.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANE 2: AI Lab -->
+                <div id="pane-ai-lab" class="research-pane transition-opacity duration-500 opacity-0 pointer-events-none absolute inset-0 flex flex-col lg:flex-row gap-12">
+                    <!-- Left: Sketch Pad -->
+                    <div class="w-full lg:w-1/2 bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-display text-primary">Anatomy Sketchpad</h3>
+                                <span class="text-xs text-gray-500 tracking-widest font-mono">VISION ANALYZER</span>
+                            </div>
+                            <p class="text-gray-400 text-sm mb-4">Sketch an equid fossil, bone structure, or toe layout on the canvas below, or upload a photo. The AI Paleontologist will identify the morphological adaptations.</p>
+                            
+                            <!-- Drawing Canvas Container -->
+                            <div class="relative bg-black rounded-xl border border-white/10 overflow-hidden group cursor-crosshair">
+                                <canvas id="sketch-canvas" width="500" height="300" class="w-full h-[300px] block bg-black"></canvas>
+                                <div class="absolute bottom-4 left-4 flex gap-2 z-20">
+                                    <button id="btn-canvas-clear" class="bg-zinc-800 hover:bg-zinc-700 text-white text-xs px-3 py-1.5 rounded font-mono transition-colors">Clear</button>
+                                    <label class="bg-zinc-800 hover:bg-zinc-700 text-white text-xs px-3 py-1.5 rounded font-mono transition-colors cursor-pointer">
+                                        Upload File
+                                        <input type="file" id="file-sketch-upload" accept="image/*" class="hidden">
+                                    </label>
+                                </div>
+                                <div id="canvas-hint" class="absolute inset-0 flex items-center justify-center pointer-events-none text-gray-600 font-mono text-sm group-hover:opacity-0 transition-opacity duration-300">
+                                    Draw your sketch here...
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-analyze-sketch" class="w-full mt-6 bg-primary hover:bg-yellow-500 text-black font-bold uppercase py-4 rounded-xl tracking-wider font-display transition-all duration-300 shadow-[0_0_15px_rgba(255,193,7,0.3)]">Analyze Sketch / Photo</button>
+                    </div>
+
+                    <!-- Right: Chat Desk -->
+                    <div class="w-full lg:w-1/2 bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-display text-primary">Paleontologist Desk</h3>
+                                <span id="api-status-badge" class="bg-green-500/10 text-green-400 border border-green-500/30 px-2 py-0.5 rounded text-[10px] font-mono tracking-widest uppercase">Connecting...</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat Feed Window -->
+                        <div class="flex-grow flex flex-col h-[320px] bg-black/40 border border-white/5 rounded-xl p-4 overflow-y-auto mb-4 space-y-4" id="chat-feed">
+                            <!-- Welcome Message -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary flex items-center justify-center text-primary font-bold text-sm shrink-0">P</div>
+                                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-3 text-sm max-w-[80%] text-gray-200">
+                                    Greetings! I am the EQUUS Exhibit AI Paleontologist. I am ready to answer your questions regarding horse evolution, skeletal changes, geological timescales, or anatomical mechanics. How can I assist you today?
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="flex gap-2">
+                            <input type="text" id="chat-input" placeholder="Ask about toes, teeth, or Eohippus..." class="flex-grow bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary text-white font-sans transition-colors">
+                            <button id="btn-chat-send" class="bg-primary hover:bg-yellow-500 text-black font-bold uppercase px-6 py-3 rounded-xl tracking-wider font-display transition-colors">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANE 3: Expedition Dig Site -->
+                <div id="pane-expedition" class="research-pane transition-opacity duration-500 opacity-0 pointer-events-none absolute inset-0 flex flex-col lg:flex-row gap-12">
+                    <!-- Left: Dig Grid -->
+                    <div class="w-full lg:w-2/3 bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-2xl font-display text-primary">Excavation Site</h3>
+                                <span id="ws-status-badge" class="bg-gray-500/10 text-gray-400 border border-gray-500/30 px-2 py-0.5 rounded text-[10px] font-mono tracking-widest uppercase">Connecting...</span>
+                            </div>
+                            <p class="text-gray-400 text-sm mb-6">Uncover geological layers by clicking blocks. Work together to extract fossil specimens. Different strata require multiple tool strikes (dirt: 1 hit, clay: 2 hits, stone: 3 hits).</p>
+                            
+                            <!-- Dig Grid Board -->
+                            <div class="grid grid-cols-10 gap-1.5 bg-black/50 border border-white/10 p-3 rounded-2xl aspect-square max-w-[450px] mx-auto" id="dig-board">
+                                <!-- Generated Dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-6">
+                            <button id="btn-reset-dig" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold uppercase py-3 px-6 rounded-xl tracking-wider font-display transition-colors text-sm">Re-seed Dig Site</button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Museum Display -->
+                    <div class="w-full lg:w-1/3 bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-display text-primary mb-6">Fossil Catalog</h3>
+                            <p class="text-gray-400 text-sm mb-6">Uncover blocks in the excavation site to find fragments of these prehistoric specimens. Complete a set to analyze it.</p>
+                            
+                            <!-- Checklist -->
+                            <div class="space-y-4" id="fossil-checklist">
+                                <!-- Fossil 1 -->
+                                <div class="bg-black/30 border border-white/10 p-4 rounded-xl flex items-center justify-between" id="chk-Eohippus-Skull">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 font-mono" id="check-icon-1"></div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-gray-400">Eohippus Skull</h4>
+                                            <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">2x2 cluster</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-600" id="status-text-1">Locked</span>
+                                </div>
+                                <!-- Fossil 2 -->
+                                <div class="bg-black/30 border border-white/10 p-4 rounded-xl flex items-center justify-between" id="chk-Mesohippus-Jaw">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 font-mono" id="check-icon-2"></div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-gray-400">Mesohippus Jaw</h4>
+                                            <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">1x2 cluster</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-600" id="status-text-2">Locked</span>
+                                </div>
+                                <!-- Fossil 3 -->
+                                <div class="bg-black/30 border border-white/10 p-4 rounded-xl flex items-center justify-between" id="chk-Merychippus-Hoof">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 font-mono" id="check-icon-3"></div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-gray-400">Merychippus Hoof</h4>
+                                            <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">1x1 single</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-600" id="status-text-3">Locked</span>
+                                </div>
+                                <!-- Fossil 4 -->
+                                <div class="bg-black/30 border border-white/10 p-4 rounded-xl flex items-center justify-between" id="chk-Pliohippus-Splint-Bone">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 font-mono" id="check-icon-4"></div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-gray-400">Pliohippus Splint Bone</h4>
+                                            <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">3x1 vertical</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-600" id="status-text-4">Locked</span>
+                                </div>
+                                <!-- Fossil 5 -->
+                                <div class="bg-black/30 border border-white/10 p-4 rounded-xl flex items-center justify-between" id="chk-Equus-Giant-Molar">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 font-mono" id="check-icon-5"></div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-gray-400">Equus Giant Molar</h4>
+                                            <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">1x3 horizontal</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-600" id="status-text-5">Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 border-t border-white/10 pt-4 flex items-center justify-between text-xs text-gray-500 font-mono">
+                            <span>MUSEUM ROOM A</span>
+                            <span id="museum-score">0% COMPLETE</span>
                         </div>
                     </div>
                 </div>
